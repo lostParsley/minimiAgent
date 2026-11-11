@@ -1,0 +1,23 @@
+{
+  "name": "temporal-search-agent",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.17.0"
+  },
+  "scripts": {
+    "start": "node --env-file=.env src/server.js",
+    "test": "node --test",
+    "check": "node scripts/check.js"
+  },
+  "dependencies": {
+    "@ai-sdk/anthropic": "4.0.102",
+    "ai": "7.0.169",
+    "express": "5.3.0",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "acorn": "8.19.0"
+  }
+}
