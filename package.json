@@ -8,11 +8,12 @@
   },
   "scripts": {
     "start": "node --env-file=.env src/server.js",
+    "chat": "node --env-file=.env src/client.js",
     "test": "node --test",
     "check": "node scripts/check.js"
   },
   "dependencies": {
-    "@ai-sdk/anthropic": "4.0.102",
+    "@ai-sdk/groq": "4.0.81",
     "ai": "7.0.169",
     "express": "5.3.0",
     "zod": "4.6.7"

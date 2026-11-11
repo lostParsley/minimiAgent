@@ -1,6 +1,6 @@
 import ex from 'express';
 import { z } from 'zod';
-import { createAnthropic as ca } from '@ai-sdk/anthropic';
+import { createGroq as cg } from '@ai-sdk/groq';
 import { timingSafeEqual as te, createHash as ch, randomUUID as ru } from 'node:crypto';
 import { once as on } from 'node:events';
 import { pathToFileURL as pu } from 'node:url';
@@ -87,8 +87,8 @@ export function sv(cf, md, fe = fetch) {
   return { ap, close: () => { clearInterval(tm); for (const a of ac) a.abort(er('serverShutdown', 503)); } };
 }
 if (process.argv[1] && import.meta.url === pu(process.argv[1]).href) {
-  const cf = z.object({ AnthropicKey: z.string().min(1), TavilyKey: z.string().min(1), AppKey: z.string().min(24), Model: z.string().min(1), Port: z.coerce.number().int().min(1).max(65535).default(3000), Host: z.string().default('127.0.0.1') }).parse(process.env);
-  const md = ca({ apiKey: cf.AnthropicKey })(cf.Model);
+  const cf = z.object({ GroqKey: z.string().min(1), TavilyKey: z.string().min(1), AppKey: z.string().min(24), Model: z.string().min(1).default('openai/gpt-oss-120b'), Port: z.coerce.number().int().min(1).max(65535).default(3000), Host: z.string().default('127.0.0.1') }).parse(process.env);
+  const md = cg({ apiKey: cf.GroqKey })(cf.Model);
   const s = sv(cf, md);
   const h = s.ap.listen(cf.Port, cf.Host, () => console.info(JSON.stringify({ status: 'listening', port: cf.Port, host: cf.Host })));
   h.requestTimeout = 15000;
